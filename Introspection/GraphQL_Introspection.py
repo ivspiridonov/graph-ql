@@ -63,12 +63,12 @@ def query(target,key):
 			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0"
 		}
 	try:
-		request = requests.post(target, json={"query": query}, headers=headers)
+		request = requests.post(target, verify=False, json={"query": query}, headers=headers)
 		if request.status_code == 200:
 			return request.json()
 		else:
 			print "Trying the old ntrospection query"
-			request = requests.post(target, json={"query": old_query}, headers=headers)
+			request = requests.post(target, verify=False, json={"query": old_query}, headers=headers)
 			if request.status_code == 200:
 				return request.json()
 			else:
